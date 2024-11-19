@@ -11,14 +11,12 @@ build_exe_options = {
 
 setup(
     name="VideoSnapScreensaver",
-    # base="Win32GUI",
     console=["main.py"],
     options={
         "py2exe": {"packages": ["sys", "os", "random", "cv2", "numpy"]},
         "include_files": [(opencv_lib_src, opencv_lib_dst)],
         "add_to_path": True,
     },
-    # executables=[Executable("main.py", base="Win32GUI")],
 )
 
 

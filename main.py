@@ -1,4 +1,5 @@
 from os import walk
+from os import getcwd
 from sys import exit
 import random
 import time
@@ -13,7 +14,6 @@ def stop(event, x, y, flags, param):
     global yd
     xd = xd + abs(xd - x)
     yd = yd + abs(yd - y)
-    print(xd + yd)
     if event == cv2.EVENT_MOUSEMOVE and xd + yd > 1000:
         exit()
 
@@ -24,7 +24,10 @@ def play_video(video):
     cv2.setMouseCallback("Frame", stop)
 
     for v in video:
-        cap = cv2.VideoCapture("E:/MOVIES/C64/" + v)
+        # cap = cv2.VideoCapture(getcwd() + "\\videos\\" + v)
+        cap = cv2.VideoCapture(
+            "C:\\Apps\\Sources\\video_snap_screensaver\\videos\\" + v
+        )
         while cap.isOpened():
             ret, frame = cap.read()
             if ret == True:
@@ -39,7 +42,12 @@ def play_video(video):
 
 
 def main():
-    videos = next(walk("E:/MOVIES/C64/"), (None, None, []))[2]  # [] if no file
+    # videos = next(walk(getcwd() + "\\videos"), (None, None, []))[2]  # [] if no file
+    videos = next(
+        walk("C:\\Apps\\Sources\\video_snap_screensaver\\videos"), (None, None, [])
+    )[
+        2
+    ]  # [] if no file
     sampled = random.sample(videos, len(videos))
     while True:
         play_video(sampled)
